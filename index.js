@@ -4,10 +4,10 @@ require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
 
+
 // middleware
 app.use(cors());
 app.use(express.json());
-
 
 console.log(process.env.DB_USER)
 console.log(process.env.DB_Pass)
@@ -34,6 +34,11 @@ async function run() {
     app.get('/product', async (req, res) => {
       const result = await productCollection.find().toArray();
       res.send(result);
+    })
+
+    app.get('/productcount', async (req, res) => {
+      const count = await productCollection.estimatedDocumentCount();
+      res.send({ count });
     })
 
     // Send a ping to confirm a successful connection
