@@ -32,6 +32,7 @@ async function run() {
     const productCollection = client.db('emaJohnDB').collection('products');
 
     app.get('/product', async (req, res) => {
+      console.log("params req", req.query)
       const result = await productCollection.find().toArray();
       res.send(result);
     })
